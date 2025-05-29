@@ -4,22 +4,24 @@ import { Button } from "./ui/button";
 
 type Props = {
   aksi: "create" | "update" | "delete";
-  user?: any; // isi saat update/delete
+  user?: any;
 };
 
 export default function FormUser({ aksi, user }: Props) {
-  const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
-    birthdate: "",
-    address: {
-      street: "",
-      city: "",
-      province: "",
-      postal_code: "",
-    },
-  });
-  
+  const [formData, setFormData] = useState(
+    user || {
+      firstname: "",
+      lastname: "",
+      birthdate: "",
+      address: {
+        street: "",
+        city: "",
+        province: "",
+        postal_code: "",
+      },
+    }
+  );
+
   const handleSubmit = async () => {
     const method =
       aksi === "create" ? "POST" : aksi === "update" ? "PUT" : "DELETE";
